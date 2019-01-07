@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[配置 Git 的 ssh 命令]]></title>
+    <url>%2F2019%2F01%2F07%2F%E9%85%8D%E7%BD%AE%20Git%20%E7%9A%84%20ssh%20%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[常用命令1234# 复制 SSH key 到剪贴板pbcopy &lt; ~/.ssh/id_rsa.pub# 测试连接ssh -T git@github.com 查看文档12man sshman ssh_config SSH 代理设置设置 ssh_config 文件1ProxyCommand nc -v -x 127.0.0.1:1086 %h %p 将SSH密钥添加到SSH代理 启动服务 12$ eval &quot;$(ssh-agent -s)&quot;Agent pid 59566 设置 ~/.ssh/config 文件 1234Host * AddKeysToAgent yes UseKeychain yes IdentityFile ~/.ssh/id_rsa 将SSH私钥添加到SSH代理，并将密码存储在密钥链中 1$ ssh-add -K ~/.ssh/id_rsa GitHub 文档]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+        <tag>Git</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git 设置代理]]></title>
+    <url>%2F2019%2F01%2F05%2Fgit%20%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%2F</url>
+    <content type="text"><![CDATA[今天 ssh clone 个库卡到想哭，直接开启翻墙工具没有效果，一顿折腾总算解决。 环境MAC 命令行 git 使用代理（Shadowsocks） 配置 http 代理12$ git config --global http.proxy http://127.0.0.1:1087$ git config --global https.proxy http://127.0.0.1:1087 如果你使用的是 SOCKS5 代理12$ git config --global http.proxy 'socks5://127.0.0.1:1086'$ git config --global https.proxy 'socks5://127.0.0.1:1086' 取消 http 代理12$ git config --global --unset http.proxy$ git config --global --unset https.proxy 查看 http 代理12$ git config --global --get http.proxy$ git config --global --get https.proxy 查看 git 设置1$ git config --list Git 的 SSH 代理通过修改 ssh_config 文件实现代理12345# Github 配置 Scoket5代理Host github.com HostName github.com IdentityFile ~/.ssh/id_rsa ProxyCommand nc -v -x 127.0.0.1:1086 %h %p 目录位置 /etc/ssh/ssh_config或~/.ssh/config（不存在就自己新建个） nc全名 NetCat ，Unix 网络工具，可以用作端口监听、端口扫描、远程文件传输、远程 shell 、模拟 TCP 等。 -v -x-x 代理地址:端口-v 日志输入-X 代理协议 4(SOCKS4)、5(SOCKS5)、connect(HTTPS proxy) 默认 5 eg. ProxyCommand nc -v -X connect -x 127.0.0.1:1086 %h %p 其他命令介绍 %h %ph -&gt; host 地址p -&gt; port 端口]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NSURLSession 每个 host 最大连接数]]></title>
+    <url>%2F2018%2F12%2F21%2FNSURLSession%20%E6%AF%8F%E4%B8%AA%20host%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[NSURLSession 默认对每个 host 有最大并发连接限制，Mac 默认值为6，iOS 默认值为4 文档123456789NSURLSessionNSURLSessionConfigurationHTTPMaximumConnectionsPerHostThis property determines the maximum number of simultaneous connections made to each host by tasks within sessions based on this configuration.This limit is per session, so if you use multiple sessions, your app as a whole may exceed this limit. Additionally, depending on your connection to the Internet, a session may use a lower limit than the one you specify.The default value is 6 in macOS, or 4 in iOS. 默认值 macOS 6 ，iOS 4]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>URLSession</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[guard]]></title>
+    <url>%2F2018%2F12%2F21%2Fguard%20%2F</url>
+    <content type="text"><![CDATA[代码引用自 Swift-Daily-Tips 12345678910111213141516171819202122/* What makes the “guard” statement truly stand out, however, is that unwrapped optional values remain available in the rest of the code block.*/&lt;!-- more --&gt;private func fetchContents() &#123; webService.fetchCategories &#123; [weak self] (response) in // Optional Binding for self guard let self = self else &#123; return &#125; self.createloadMoreRequest(content: response) &#125;&#125;private func createloadMoreRequest(content: Content?) &#123; // Optional Binding for content guard let content = content else &#123; return &#125; let categoryId = content.categoryId self.loadMore(id: categoryId)&#125; 在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践 为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&lt;Shape&gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定 1234567891011var s1:Shape? = Shape()s1?.numberOfSides = 100func showInfo(s:Shape?) &#123; print(type(of: s)) guard let t = s else &#123; return &#125; print(type(of: t))&#125; showInfo(s: s1) 打印结果 和 内存 12345678910Optional&lt;Shape&gt;Shape//控制台打印的内存信息Printing description of s:▿ Optional&lt;Shape&gt; ▿ some : &lt;Shape: 0x60000325fea0&gt; Printing description of t:&lt;Shape: 0x60000325fea0&gt; 可以看到的是 s 仍然存在 并且 s 和 t 引用同一块地址 👍]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS 观察者模式 object 的作用]]></title>
+    <url>%2F2018%2F12%2F18%2FiOS%20%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%20object%20%E7%9A%84%E4%BD%9C%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[根据 object 过滤观察者收到的通知1- (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSNotificationName)aName object:(id)anObject; ##文档 1234567891011121314151617181920ParametersobserverObject registering as an observer.&lt;!-- 观察者--&gt;aSelectorSelector that specifies the message the receiver sends observer to notify it of the notification posting. The method specified by aSelector must have one and only one argument (an instance of NSNotification).&lt;!-- 收到通知后调用观察者的方法，方法有且只有一个 Notifation 类型的参数 --&gt;aNameThe name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.&lt;!-- 通知的名称，观察者只接收和这个名字相同的通知--&gt;If you pass nil, the notification center doesn’t use a notification’s name to decide whether to deliver it to the observer.&lt;!-- name 为空，通知中心不已 name 为依据发送通知 --&gt;anObjectThe object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.&lt;!-- 观察者想要接收其通知的对象，只有这个对象发送的通知才会传递给观察者。--&gt;If you pass nil, the notification center doesn’t use a notification’s sender to decide whether to deliver it to the observer.&lt;!-- object 为 nil 表示表示接受所有发送者的消息 --&gt; 举个例子123456//定义两个对象_p = [[Person alloc] init];_p.name = @&quot;111&quot;;_p2 = [[Person alloc] init];_p2.name = @&quot;222&quot;; 123456789101112131415161718#import &quot;Person.h&quot;@implementation Person- (instancetype)init&#123; self = [super init]; if (self) &#123; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextChanged:) name:@&quot;NotificationNameTest&quot; object:self]; &#125; return self;&#125;- (void)handleTextChanged:(NSNotification *)sender&#123; NSLog(@&quot;name = %@no = %@&quot;,_name,sender);&#125;@end 发送以下通知 1234[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;NotificationNameTest&quot; object:_p];//_p 收到通知并打印[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;NotificationNameTest&quot; object:nil];// _p,_p2 都未收到通知]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>KVO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo常用命令]]></title>
+    <url>%2F2018%2F11%2F26%2Fhexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[安装和更新npm install -g hexo-cli 生成静态页hexo generate 发布到 githexo deploy 本地服务器测试运行hexo server 创建新文章hexo new [layout] &lt;title&gt;]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>Hexo</tag>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo 介绍]]></title>
+    <url>%2F2018%2F11%2F26%2Fhexo%20%E4%BB%8B%E7%BB%8D%2F</url>
+    <content type="text"><![CDATA[什么是hexoHexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装和更新npm install -g hexo-cli 生成静态页hexo generate 发布到 githexo deploy 本地服务器测试运行hexo server 创建新文章hexo new [layout] &lt;title&gt;]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hugging Compression]]></title>
+    <url>%2F2018%2F11%2F23%2FHuggingPriority-CompressionResistance%2F</url>
+    <content type="text"><![CDATA[AutoLayout 的 content 自身大小计算 setContentHuggingPriorityhug -&gt; vt. 拥抱；紧抱；抱有，坚持 值越大越不容易被拉伸 setContentCompressionResistancePriorityCompression -&gt; n. 压缩，浓缩；压榨，压迫 值越大越不容易被压缩 相关代码12345- (UILayoutPriority)contentHuggingPriorityForAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (void)setContentHuggingPriority:(UILayoutPriority)priority forAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (UILayoutPriority)contentCompressionResistancePriorityForAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (void)setContentCompressionResistancePriority:(UILayoutPriority)priority forAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0); 时间长就容易记混的概念,忘了就翻出来看看]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>UILabel</tag>
+        <tag>AutoLayout</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[addObserver 监听属性导致崩溃]]></title>
+    <url>%2F2018%2F08%2F31%2FaddObserver%20%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7%E5%AF%BC%E8%87%B4%E5%B4%A9%E6%BA%83%2F</url>
+    <content type="text"><![CDATA[iOS KVO 监听对象属性的时候莫名其妙崩溃解决办法1- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context context 不要为空随便写点什么或者 使用下面的方式来定义唯一的 context 12void *RandomContext = &amp;RandomContext;[self addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:RandomContext];]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>KVO</tag>
+        <tag>Crash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用 imageWithContentsOfFile 自动加载@2x @3x图]]></title>
+    <url>%2F2018%2F03%2F17%2F%E4%BD%BF%E7%94%A8%20imageWithContentsOfFile%20%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%402x%20%403x%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[使用本地存储文件自动获取2x 3x 图12NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@&quot;t.png&quot;];_imageView.image = [UIImage imageWithContentsOfFile: imagePath];]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>OC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cocoapods 引入 Masonry 使用类别 mas_bottomMargin 崩溃]]></title>
+    <url>%2F2018%2F03%2F09%2Fcocoapods%20%E5%BC%95%E5%85%A5%20Masonry%20%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%88%AB%20mas_bottomMargin%20%E5%B4%A9%E6%BA%83%2F</url>
+    <content type="text"><![CDATA[报错信息1-[UIView mas_bottomMargin]: unrecognized selector sent to instance 错误分析 检查于 setting 配置里面写没有-all_load，但是配置了-ObjC，不是这里的原因。 调用mas_bottom时正常运行，mas_bottomMargin会崩溃。猜测可能是 Masonry 的原因。 检查源码发现如下关键代码，宏定义 iOS 版本低于8.0 没有Margin属性 1#if (__IPHONE_OS_VERSION_MIN_REQUIRED &gt;= 80000) || (__TV_OS_VERSION_MIN_REQUIRED &gt;= 9000) 我工程配置的 iOS8.0，但是 pods 里面 Masonry 的静态库的 iOS Deployment Target 是 iOS6.0。 改成 iOS8.0 运行，一切OK。]]></content>
+      <categories>
+        <category>Cocoapods</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Crash</tag>
+        <tag>Cocoapods</tag>
+        <tag>Masonry</tag>
+      </tags>
+  </entry>
+</search>
