@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="代码引用自 Swift-Daily-Tips  12345678910111213141516171819202122/*  What makes the “guard” statement truly stand out,  however, is that unwrapped optional values remain  available in the rest of the code">
+  <meta name="description" content="在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践  为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&amp;lt;Shape&amp;gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定  1234567891011var s1:Shape? = Shape()s1?.numberOfSid">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="guard">
 <meta property="og:url" content="http://yoursite.com/2018/12/21/guard /index.html">
 <meta property="og:site_name" content="Forkinggggg">
-<meta property="og:description" content="代码引用自 Swift-Daily-Tips  12345678910111213141516171819202122/*  What makes the “guard” statement truly stand out,  however, is that unwrapped optional values remain  available in the rest of the code">
+<meta property="og:description" content="在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践  为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&amp;lt;Shape&amp;gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定  1234567891011var s1:Shape? = Shape()s1?.numberOfSid">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-06T15:08:52.086Z">
+<meta property="og:updated_time" content="2019-01-10T14:44:13.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="guard">
-<meta name="twitter:description" content="代码引用自 Swift-Daily-Tips  12345678910111213141516171819202122/*  What makes the “guard” statement truly stand out,  however, is that unwrapped optional values remain  available in the rest of the code">
+<meta name="twitter:description" content="在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践  为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&amp;lt;Shape&amp;gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定  1234567891011var s1:Shape? = Shape()s1?.numberOfSid">
 
 
 
@@ -395,7 +395,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-06 23:08:52" itemprop="dateModified" datetime="2019-01-06T23:08:52+08:00">2019-01-06</time>
+                <time title="修改时间：2019-01-10 22:44:13" itemprop="dateModified" datetime="2019-01-10T22:44:13+08:00">2019-01-10</time>
               
             
           </span>
@@ -457,11 +457,7 @@
       
 
       
-        <blockquote>
-<p>代码引用自 Swift-Daily-Tips</p>
-</blockquote>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  What makes the “guard” statement truly stand out,</span></span><br><span class="line"><span class="comment">  however, is that unwrapped optional values remain</span></span><br><span class="line"><span class="comment">  available in the rest of the code block.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">fetchContents</span><span class="params">()</span></span> &#123;</span><br><span class="line">    webService.fetchCategories &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (response) <span class="keyword">in</span></span><br><span class="line">        <span class="comment">// Optional Binding for self</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> <span class="keyword">self</span> = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">self</span>.createloadMoreRequest(content: response)               </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">createloadMoreRequest</span><span class="params">(content: Content?)</span></span> &#123;</span><br><span class="line">    <span class="comment">// Optional Binding for content</span></span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> content = content <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="keyword">let</span> categoryId = content.categoryId</span><br><span class="line">    <span class="keyword">self</span>.loadMore(id: categoryId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下</p>
+        <p>在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下</p>
 <p>##猜想和实践</p>
 <ul>
 <li>为了方便区分 我这里用 t 、s 区分命名</li>
@@ -615,7 +611,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

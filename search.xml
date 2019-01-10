@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>%2F2019%2F01%2F10%2Fguard%20%2F</url>
-    <content type="text"><![CDATA[guard 有趣的使用title: guardauthor: 杨林categories: iOStags: Swift date: 2018-12-21 09:41:12在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践 为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&lt;Shape&gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定 1234567891011var s1:Shape? = Shape()s1?.numberOfSides = 100func showInfo(s:Shape?) &#123; print(type(of: s)) guard let t = s else &#123; return &#125; print(type(of: t))&#125; showInfo(s: s1) 打印结果 和 内存 12345678910Optional&lt;Shape&gt;Shape//控制台打印的内存信息Printing description of s:▿ Optional&lt;Shape&gt; ▿ some : &lt;Shape: 0x60000325fea0&gt; Printing description of t:&lt;Shape: 0x60000325fea0&gt; 可以看到的是 s 仍然存在 并且 s 和 t 引用同一块地址 👍]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[moetu 图床-星云壁纸]]></title>
     <url>%2F2019%2F01%2F07%2Fmoetu%20%E5%9B%BE%E5%BA%8A-%E6%98%9F%E4%BA%91%E5%A3%81%E7%BA%B8%2F</url>
     <content type="text"><![CDATA[moetu 图床图片测试]]></content>
@@ -76,6 +71,17 @@
       <tags>
         <tag>Note</tag>
         <tag>URLSession</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[guard]]></title>
+    <url>%2F2018%2F12%2F21%2Fguard%20%2F</url>
+    <content type="text"><![CDATA[在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 ##猜想和实践 为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&lt;Shape&gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定 1234567891011var s1:Shape? = Shape()s1?.numberOfSides = 100func showInfo(s:Shape?) &#123; print(type(of: s)) guard let t = s else &#123; return &#125; print(type(of: t))&#125; showInfo(s: s1) 打印结果 和 内存 12345678910Optional&lt;Shape&gt;Shape//控制台打印的内存信息Printing description of s:▿ Optional&lt;Shape&gt; ▿ some : &lt;Shape: 0x60000325fea0&gt; Printing description of t:&lt;Shape: 0x60000325fea0&gt; 可以看到的是 s 仍然存在 并且 s 和 t 引用同一块地址 👍]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
         <tag>Swift</tag>
       </tags>
   </entry>
