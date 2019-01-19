@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[macOS 开发 - 设置壁纸]]></title>
+    <url>%2F2019%2F01%2F17%2FmacOS%20%E5%BC%80%E5%8F%91%20-%20%E8%AE%BE%E7%BD%AE%E5%A3%81%E7%BA%B8%2F</url>
+    <content type="text"><![CDATA[Mac 想要在代码中设置桌面壁纸需要使用到NSWorkspace这个类 NSWorkspace 简介NSWorkspace继承自NSObject，属于AppKit.framework。每个应用程序有一个共享的NSWorkspace对象 [NSWorkspace sharedWorkspace]NSWorkspace可以启动其他应用程序和执行各种文件处理服务。 获取当前桌面壁纸1234// 当前壁纸路径NSURL * url = [[NSWorkspace sharedWorkspace] desktopImageURLForScreen:[NSScreen mainScreen]];// 当前壁纸的配置包含 缩放类型（NSImageScaling） 比例缩放的剪切 填充颜色NSDictionary * options = [[NSWorkspace sharedWorkspace] desktopImageOptionsForScreen:[NSScreen mainScreen]]; 设置新的桌面壁纸1[[NSWorkspace sharedWorkspace] setDesktopImageURL:url forScreen:[NSScreen mainScreen] options:@&#123;NSWorkspaceDesktopImageScalingKey:@(NSImageScaleProportionallyUpOrDown)&#125; error:nil]; Mac 开发资料稀少，且行且珍惜。]]></content>
+      <categories>
+        <category>macOS开发</category>
+      </categories>
+      <tags>
+        <tag>桌面</tag>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[moetu 图床-星云壁纸]]></title>
     <url>%2F2019%2F01%2F07%2Fmoetu%20%E5%9B%BE%E5%BA%8A-%E6%98%9F%E4%BA%91%E5%A3%81%E7%BA%B8%2F</url>
     <content type="text"><![CDATA[moetu 图床图片测试]]></content>
@@ -155,8 +167,8 @@
       </categories>
       <tags>
         <tag>Note</tag>
-        <tag>KVO</tag>
         <tag>Crash</tag>
+        <tag>KVO</tag>
       </tags>
   </entry>
   <entry>
@@ -207,6 +219,18 @@
         <tag>Crash</tag>
         <tag>Cocoapods</tag>
         <tag>Masonry</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS 11 设置navigationBar.alpha 失效]]></title>
+    <url>%2F2017%2F06%2F23%2FiOS%2011%20%E8%AE%BE%E7%BD%AEnavigationBar.alpha%20%E5%A4%B1%E6%95%88%2F</url>
+    <content type="text"><![CDATA[navigationBar透明实现（iOS 11 之前） 设置 navigationBar 的 BackgroundImage 为 [UIImage new] 设置navigationBar 的 subviews.firstObject 的 alpha = 0 ，subviews.firstObject 是 _UIbarBackGround 类型 ；再或者设置_UIbarBackGround 上面模糊的那个 view 的alpha 也可以 iOS 11出现的问题iOS 11 新出来一个LargeTitles ，导航栏变得比以前更大 新的导航栏带来一个问题，之前透过这是 alpha 值来进行透明度设置会失效，原因是在加入 large 模式之后 apple 会对普通模式的 nav 的 _UIbarBackGround 进行一次 alpha = 1 的设置。 关于这一点出现的原因我有一个猜想 首先设置nav 的 backgroundImage 给 nav 一个背景图 然后设置 nav 的 backgroundColor 当 prefersLargeTitles = NO 也就是 普通 nav 模式的时候，显示backgroundImage 当 prefersLargeTitles = YES, nav 显示的是backgroundColor 此时的_UIbarBackGround 的 alpha 被 apple 设置为 0 所以相应的在 普通模式的时候 apple 为了显示backgroundImage 会把 nav 的 alpha 设置为 1 ，这就影响了我们在 viewWillAppear 里面给 nav 设置的 alpha PS：backgroundImage 是在 _UIbarBackGround上面的，backgroundColor设置在navigationBar上]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>NavigationBar</tag>
       </tags>
   </entry>
   <entry>
