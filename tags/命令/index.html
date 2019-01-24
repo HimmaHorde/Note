@@ -564,6 +564,43 @@
           
 
           
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/HimmaHorde" title="GitHub &rarr; https://github.com/HimmaHorde" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:lin897839@gmail.com" title="E-Mail &rarr; mailto:lin897839@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/u/d2c069de1a7d" title="Weibo &rarr; https://www.jianshu.com/u/d2c069de1a7d" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
 
           
 
@@ -726,6 +763,32 @@
 
 
 
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function(item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'fRWuTjSEDqJWmB3DrTjX3Lsj-gzGzoHsz',
+      appKey: 'kp5uK2DcgdmK1KfHUgJcroep',
+      placeholder: 'Just go go',
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true
+    });
+  </script>
 
 
 
