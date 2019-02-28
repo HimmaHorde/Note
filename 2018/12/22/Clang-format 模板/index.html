@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Clang-format 配置解读，更好选择自己所需要的格式规范">
+<meta name="keywords" content="OC,Format,翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clang-format 模板">
+<meta property="og:url" content="https://jackyanglin.com/2018/12/22/Clang-format 模板/index.html">
+<meta property="og:site_name" content="Forkinggggg">
+<meta property="og:description" content="Clang-format 配置解读，更好选择自己所需要的格式规范">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://moetu.fastmirror.org/images/2019/01/07/coeef0463af8e39ffab.gif">
+<meta property="og:updated_time" content="2019-02-28T14:07:47.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clang-format 模板">
+<meta name="twitter:description" content="Clang-format 配置解读，更好选择自己所需要的格式规范">
+<meta name="twitter:image" content="https://moetu.fastmirror.org/images/2019/01/07/coeef0463af8e39ffab.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="https://jackyanglin.com/2018/12/22/Clang-format 模板/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Clang-format 模板 | Forkinggggg</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Forkinggggg</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jackyanglin.com/2018/12/22/Clang-format 模板/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="杨林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/d3649231326efbdcb96c98a050b41d8f?s=200&d=identicon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Forkinggggg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Clang-format 模板
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-22 13:20:14" itemprop="dateCreated datePublished" datetime="2018-12-22T13:20:14+08:00">2018-12-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-28 22:07:47" itemprop="dateModified" datetime="2019-02-28T22:07:47+08:00">2019-02-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/22/Clang-format 模板/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/22/Clang-format 模板/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2018/12/22/Clang-format 模板/" class="leancloud_visitors" data-flag-title="Clang-format 模板">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Clang-format 配置解读，更好选择自己所需要的格式规范<br><img src="https://moetu.fastmirror.org/images/2019/01/07/coeef0463af8e39ffab.gif" alt=""><br><a id="more"></a><br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto</span></span><br><span class="line"><span class="attr">Language:</span>        <span class="string">ObjC</span></span><br><span class="line"><span class="comment"># 访问说明符(public、private等)的偏移</span></span><br><span class="line"><span class="attr">AccessModifierOffset:</span> <span class="bullet">-4</span></span><br><span class="line"><span class="comment"># 开括号(开圆括号、开尖括号、开方括号)后的对齐</span></span><br><span class="line"><span class="attr">AlignAfterOpenBracket:</span> <span class="string">DontAlign</span></span><br><span class="line"><span class="comment"># 连续赋值时，等号对齐</span></span><br><span class="line"><span class="attr">AlignConsecutiveAssignments:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 连续声明时，对齐所有声明的变量名</span></span><br><span class="line"><span class="attr">AlignConsecutiveDeclarations:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># define 换行时反斜杠位置：左对齐</span></span><br><span class="line"><span class="attr">AlignEscapedNewlines:</span> <span class="string">Left</span></span><br><span class="line"><span class="comment"># 水平对齐二元和三元表达式的操作数</span></span><br><span class="line"><span class="attr">AlignOperands:</span>  <span class="literal">true</span></span><br><span class="line"><span class="comment"># 连续代码的尾部注释对齐</span></span><br><span class="line"><span class="attr">AlignTrailingComments:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 允许短代码块放在同一行 if 1 &#123; return; &#125;</span></span><br><span class="line"><span class="attr">AllowShortBlocksOnASingleLine:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 允许短的case标签放在同一行</span></span><br><span class="line"><span class="attr">AllowShortCaseLabelsOnASingleLine:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 允许短的函数放在同一行</span></span><br><span class="line"><span class="attr">AllowShortFunctionsOnASingleLine:</span> <span class="string">All</span></span><br><span class="line"><span class="comment"># 允许短的if语句保持在同一行</span></span><br><span class="line"><span class="attr">AllowShortIfStatementsOnASingleLine:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 允许短的循环保持在同一行</span></span><br><span class="line"><span class="attr">AllowShortLoopsOnASingleLine:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 总是在返回类型后换行</span></span><br><span class="line"><span class="attr">AlwaysBreakAfterReturnType:</span> <span class="string">None</span></span><br><span class="line"><span class="comment"># 总是在多行string字面量前换行</span></span><br><span class="line"><span class="attr">AlwaysBreakBeforeMultilineStrings:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 总是在template声明后换行</span></span><br><span class="line"><span class="attr">AlwaysBreakTemplateDeclarations:</span> <span class="string">MultiLine</span></span><br><span class="line"><span class="comment"># false表示函数实参要么都在同一行，要么都各自一行</span></span><br><span class="line"><span class="attr">BinPackArguments:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># false表示所有形参要么都在同一行，要么都各自一行</span></span><br><span class="line"><span class="attr">BinPackParameters:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在大括号前换行: Attach(始终将大括号附加到周围的上下文), Linux(除函数、命名空间和类定义，与Attach类似), </span></span><br><span class="line"><span class="comment">#   Mozilla(除枚举、函数、记录定义，与Attach类似), Stroustrup(除函数定义、catch、else，与Attach类似), </span></span><br><span class="line"><span class="comment">#   Allman(总是在大括号前换行), GNU(总是在大括号前换行，并对于控制语句的大括号增加额外的缩进), WebKit(在函数前换行), Custom</span></span><br><span class="line"><span class="comment">#   注：这里认为语句块也属于函数</span></span><br><span class="line"><span class="attr">BreakBeforeBraces:</span> <span class="string">Custom</span></span><br><span class="line"><span class="comment"># 大括号换行，只有当BreakBeforeBraces设置为Custom时才有效</span></span><br><span class="line"><span class="attr">BraceWrapping:</span></span><br><span class="line">  <span class="comment"># class定义后面   </span></span><br><span class="line"><span class="attr">  AfterClass:</span>      <span class="literal">false</span></span><br><span class="line">  <span class="comment"># 控制语句后面</span></span><br><span class="line"><span class="attr">  AfterControlStatement:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># enum定义后面</span></span><br><span class="line"><span class="attr">  AfterEnum:</span>       <span class="literal">false</span></span><br><span class="line">  <span class="comment"># 函数定义后面clang-format version 8.0.0 (tags/google/stable/2018-12-18) (此版本之后 OC 可用) </span></span><br><span class="line"><span class="attr">  AfterFunction:</span>   <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 命名空间定义后面</span></span><br><span class="line"><span class="attr">  AfterNamespace:</span>  <span class="literal">false</span></span><br><span class="line">  <span class="comment"># OC 定义后面</span></span><br><span class="line"><span class="attr">  AfterObjCDeclaration:</span>  <span class="literal">false</span></span><br><span class="line">  <span class="comment"># struct定义后面</span></span><br><span class="line"><span class="attr">  AfterStruct:</span>     <span class="literal">false</span></span><br><span class="line">  <span class="comment"># union定义后面</span></span><br><span class="line"><span class="attr">  AfterUnion:</span>      <span class="literal">false</span></span><br><span class="line">  <span class="comment"># entern定义后面</span></span><br><span class="line"><span class="attr">  AfterExternBlock:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># catch之前</span></span><br><span class="line"><span class="attr">  BeforeCatch:</span>     <span class="literal">false</span></span><br><span class="line">  <span class="comment"># else之前</span></span><br><span class="line"><span class="attr">  BeforeElse:</span>      <span class="literal">false</span></span><br><span class="line">  <span class="comment"># 缩进大括号</span></span><br><span class="line"><span class="attr">  IndentBraces:</span>    <span class="literal">false</span></span><br><span class="line">  <span class="comment">#false 时，空方法体 &#123;&#125; 放在一行</span></span><br><span class="line"><span class="attr">  SplitEmptyFunction:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment">#false 时，空记录（例如，类，结构或联合）&#123;&#125; 放在一行</span></span><br><span class="line"><span class="attr">  SplitEmptyRecord:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># false 且 AfterNamespace == true 时 空命名空间体可放到一行: &#123;&#125;</span></span><br><span class="line"><span class="attr">  SplitEmptyNamespace:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 在二元运算符前换行: None(在操作符后换行), NonAssignment(在非赋值的操作符前换行), All(在操作符前换行)  </span></span><br><span class="line"><span class="attr">BreakBeforeBinaryOperators:</span> <span class="string">All</span></span><br><span class="line"><span class="comment"># 三元运算符 true 符号前换行 false 符号后换行</span></span><br><span class="line"><span class="attr">BreakBeforeTernaryOperators:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 继承时 BeforeColon ‘：’前换行</span></span><br><span class="line"><span class="attr">BreakInheritanceList:</span> <span class="string">BeforeColon</span></span><br><span class="line"><span class="comment"># 在构造函数的初始化列表的逗号前换行</span></span><br><span class="line"><span class="attr">BreakConstructorInitializers:</span> <span class="string">BeforeComma</span></span><br><span class="line"><span class="comment"># 在Java文件中的字段上的每个注释之后中断。</span></span><br><span class="line"><span class="attr">BreakAfterJavaFieldAnnotations:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># Allow breaking string literals when formatting.</span></span><br><span class="line"><span class="attr">BreakStringLiterals:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 每行字符的限制，0表示没有限制</span></span><br><span class="line"><span class="attr">ColumnLimit:</span>     <span class="number">0</span></span><br><span class="line"><span class="comment"># 描述具有特殊意义的注释的正则表达式，它不应该被分割为多行或以其它方式改变</span></span><br><span class="line"><span class="attr">CommentPragmas:</span>  <span class="string">'^ IWYU pragma:'</span></span><br><span class="line"><span class="comment"># true，连续的名称空间声明将位于同一行。如果为false，则在新行上声明每个名称空间。</span></span><br><span class="line"><span class="attr">CompactNamespaces:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 构造函数的初始化列表要么都在同一行，要么都各自一行</span></span><br><span class="line"><span class="attr">ConstructorInitializerAllOnOneLineOrOnePerLine:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 构造函数的初始化列表的缩进宽度</span></span><br><span class="line"><span class="attr">ConstructorInitializerIndentWidth:</span> <span class="number">4</span></span><br><span class="line"><span class="comment"># 延续的行的缩进宽度</span></span><br><span class="line"><span class="attr">ContinuationIndentWidth:</span> <span class="number">4</span></span><br><span class="line"><span class="comment"># 去除C++11的列表初始化的大括号&#123;后和&#125;前的空格</span></span><br><span class="line"><span class="attr">Cpp11BracedListStyle:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 继承最常用的指针和引用的对齐方式</span></span><br><span class="line"><span class="attr">DerivePointerAlignment:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 关闭格式化</span></span><br><span class="line"><span class="attr">DisableFormat:</span>   <span class="literal">false</span></span><br><span class="line"><span class="comment"># 自动检测函数的调用和定义是否被格式为每行一个参数(Experimental)</span></span><br><span class="line"><span class="attr">ExperimentalAutoDetectBinPacking:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># true 自动检测补全命名空间尾部的大括号</span></span><br><span class="line"><span class="attr">FixNamespaceComments:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 需要被解读为foreach循环而不是函数调用的宏</span></span><br><span class="line"><span class="attr">ForEachMacros:</span>   </span><br><span class="line"><span class="bullet">  -</span> <span class="string">foreach</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">Q_FOREACH</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">BOOST_FOREACH</span></span><br><span class="line"><span class="comment"># #include 分组排序方式 Preserve(按组排序) Merge（合并成一组排序）Regroup（按 IncludeCategories 重新分组排序）</span></span><br><span class="line"><span class="attr">IncludeBlocks:</span>   <span class="string">Preserve</span></span><br><span class="line"><span class="attr">IncludeCategories:</span> </span><br><span class="line"><span class="attr">  - Regex:</span>           <span class="string">'^"(llvm|llvm-c|clang|clang-c)/'</span></span><br><span class="line"><span class="attr">    Priority:</span>        <span class="number">2</span></span><br><span class="line"><span class="attr">  - Regex:</span>           <span class="string">'^(&lt;|"(gtest|gmock|isl|json)/)'</span></span><br><span class="line"><span class="attr">    Priority:</span>        <span class="number">3</span></span><br><span class="line"><span class="attr">  - Regex:</span>           <span class="string">'.*'</span></span><br><span class="line"><span class="attr">    Priority:</span>        <span class="number">1</span></span><br><span class="line"><span class="comment"># Specify a regular expression of suffixes that are allowed in the file-to-main-include mapping.</span></span><br><span class="line"><span class="attr">IncludeIsMainRegex:</span> <span class="string">'(Test)?$'</span></span><br><span class="line"><span class="comment"># case 是否缩进一级</span></span><br><span class="line"><span class="attr">IndentCaseLabels:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 预处理代码缩进样式。None（不缩进）AfterHash（缩进）</span></span><br><span class="line"><span class="attr">IndentPPDirectives:</span> <span class="string">None</span></span><br><span class="line"><span class="comment"># 缩进宽度</span></span><br><span class="line"><span class="attr">IndentWidth:</span>     <span class="number">4</span></span><br><span class="line"><span class="comment"># 函数在返回类型后换行，是否缩进函数名</span></span><br><span class="line"><span class="attr">IndentWrappedFunctionNames:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># JS 引号样式 Leave("",'') Single("") Double("")</span></span><br><span class="line"><span class="attr">JavaScriptQuotes:</span> <span class="string">Leave</span></span><br><span class="line"><span class="comment"># JS import 是否需要换行</span></span><br><span class="line"><span class="attr">JavaScriptWrapImports:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 保留在块开始处的空行(OC 没用)</span></span><br><span class="line"><span class="attr">KeepEmptyLinesAtTheStartOfBlocks:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 开始一个块的宏的正则表达式</span></span><br><span class="line"><span class="attr">MacroBlockBegin:</span> <span class="string">''</span></span><br><span class="line"><span class="comment"># 结束一个块的宏的正则表达式</span></span><br><span class="line"><span class="attr">MacroBlockEnd:</span>   <span class="string">''</span></span><br><span class="line"><span class="comment"># 连续最大空行数</span></span><br><span class="line"><span class="attr">MaxEmptyLinesToKeep:</span> <span class="number">1</span></span><br><span class="line"><span class="comment"># 命名空间的缩进: None, Inner(缩进嵌套的命名空间中的内容), All</span></span><br><span class="line"><span class="attr">NamespaceIndentation:</span> <span class="string">Inner</span></span><br><span class="line"><span class="comment"># OC 协议根据 ColumnLimit 长度 换行</span></span><br><span class="line"><span class="attr">ObjCBinPackProtocolList:</span> <span class="string">Auto</span></span><br><span class="line"><span class="comment"># 使用 OC block 函数实现内部缩进宽度</span></span><br><span class="line"><span class="attr">ObjCBlockIndentWidth:</span> <span class="number">4</span></span><br><span class="line"><span class="comment"># 在ObjC的@property后添加一个空格</span></span><br><span class="line"><span class="attr">ObjCSpaceAfterProperty:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 在OC的protocol列表前添加一个空格</span></span><br><span class="line"><span class="attr">ObjCSpaceBeforeProtocolList:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">PenaltyBreakAssignment:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">PenaltyBreakBeforeFirstCallParameter:</span> <span class="number">19</span></span><br><span class="line"><span class="attr">PenaltyBreakComment:</span> <span class="number">300</span></span><br><span class="line"><span class="attr">PenaltyBreakFirstLessLess:</span> <span class="number">120</span></span><br><span class="line"><span class="attr">PenaltyBreakString:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">PenaltyBreakTemplateDeclaration:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">PenaltyExcessCharacter:</span> <span class="number">1000000</span></span><br><span class="line"><span class="attr">PenaltyReturnTypeOnItsOwnLine:</span> <span class="number">60</span></span><br><span class="line"><span class="comment"># 指针和引用的对齐: Left（int* a;）, Right（int *a;）, Middle（int * a;）</span></span><br><span class="line"><span class="attr">PointerAlignment:</span> <span class="string">Right</span></span><br><span class="line"><span class="comment"># 允许重新排版注释</span></span><br><span class="line"><span class="attr">ReflowComments:</span>  <span class="literal">true</span></span><br><span class="line"><span class="comment"># 允许排序#include,首字母排序</span></span><br><span class="line"><span class="attr">SortIncludes:</span>    <span class="literal">true</span></span><br><span class="line"><span class="comment"># true using 自动排序</span></span><br><span class="line"><span class="attr">SortUsingDeclarations:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在C风格类型转换后添加空格</span></span><br><span class="line"><span class="attr">SpaceAfterCStyleCast:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># template 关键字后添加空格</span></span><br><span class="line"><span class="attr">SpaceAfterTemplateKeyword:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># false 移除 = +=  两侧的空格</span></span><br><span class="line"><span class="attr">SpaceBeforeAssignmentOperators:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 初始化 c++ 11 对象的前面空格</span></span><br><span class="line"><span class="attr">SpaceBeforeCpp11BracedList:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 构造函数：前加空格</span></span><br><span class="line"><span class="attr">SpaceBeforeCtorInitializerColon:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 继承的：前面加空格</span></span><br><span class="line"><span class="attr">SpaceBeforeInheritanceColon:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 开圆括号之前添加一个空格: Never, ControlStatements, Always</span></span><br><span class="line"><span class="attr">SpaceBeforeParens:</span> <span class="string">ControlStatements</span></span><br><span class="line"><span class="comment"># false 清除 for 循环:前面的空格 for (auto v : values) &#123;&#125; </span></span><br><span class="line"><span class="attr">SpaceBeforeRangeBasedForLoopColon:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 在空的圆括号中添加空格</span></span><br><span class="line"><span class="attr">SpaceInEmptyParentheses:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在尾随的评论前添加的空格数(只适用于//)</span></span><br><span class="line"><span class="attr">SpacesBeforeTrailingComments:</span> <span class="number">1</span></span><br><span class="line"><span class="comment"># 在尖括号内部前后添加空格 &lt; int &gt;</span></span><br><span class="line"><span class="attr">SpacesInAngles:</span>  <span class="literal">false</span></span><br><span class="line"><span class="comment"># 快捷数组 内部加空格 [ 1, 2, 3 ]; ：前加空格 f(&#123;a : 1, b : 2, c : 3&#125;);</span></span><br><span class="line"><span class="attr">SpacesInContainerLiterals:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在C风格类型转换的括号中添加空格</span></span><br><span class="line"><span class="attr">SpacesInCStyleCastParentheses:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在圆括号的(后和)前添加空格</span></span><br><span class="line"><span class="attr">SpacesInParentheses:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 在方括号的[后和]前添加空格，lamda表达式和未指明大小的数组的声明不受影响</span></span><br><span class="line"><span class="attr">SpacesInSquareBrackets:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 标准: Cpp03, Cpp11, Auto</span></span><br><span class="line"><span class="attr">Standard:</span>        <span class="string">Cpp11</span></span><br><span class="line"><span class="comment"># tab宽度</span></span><br><span class="line"><span class="attr">TabWidth:</span>        <span class="number">4</span></span><br><span class="line"><span class="attr">UseTab:</span>          <span class="string">Never</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure></p>
+<p>##实例</p>
+<h4 id="AccessModifierOffset-int-✨"><a href="#AccessModifierOffset-int-✨" class="headerlink" title="AccessModifierOffset (int) ✨"></a>AccessModifierOffset (<code>int</code>) ✨</h4><blockquote>
+<p>修饰符缩进</p>
+</blockquote>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//AccessModifierOffset: 0</span></span><br><span class="line">    <span class="keyword">@public</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *_dataArray;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//AccessModifierOffset: -4</span></span><br><span class="line"><span class="keyword">@public</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *_dataArray;</span><br></pre></td></tr></table></figure>
+<p>####AlignAfterOpenBracket (<code>BracketAlignmentStyle</code>)</p>
+<blockquote>
+<p>设置括号内参数水平分布方式 三种样式 Align，DontAlign，AlwaysBreak</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//Align 样式，参数对齐左括号</span><br><span class="line">someLongFunction(argument1,</span><br><span class="line">                 argument2);</span><br><span class="line">                 </span><br><span class="line">//DontAlign 样式，不要对齐，换行使用 ContinuationIndentWidth 参数</span><br><span class="line">someLongFunction(argument1,</span><br><span class="line">    argument2);</span><br><span class="line">    </span><br><span class="line">//AlwaysBreak 样式，在左圆括号后总是换行, 如果参数不能适应单行</span><br><span class="line">someLongFunction(</span><br><span class="line">    argument1, argument2);</span><br></pre></td></tr></table></figure>
+<p>####AlignConsecutiveAssignments (<code>bool</code>) ✨✨</p>
+<blockquote>
+<p>如果为真（true），对齐连续的赋值<br>将多行代码的赋值符号对齐(🤔连续没有空白行的代码块就等号对齐)</p>
+</blockquote>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *a         = <span class="string">@"Hello World"</span>;</span><br><span class="line"><span class="keyword">int</span> b               = <span class="number">66</span>;</span><br><span class="line"><span class="built_in">NSMutableArray</span> *arr = <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *c   = <span class="string">@"BiLi"</span>;</span><br><span class="line"><span class="built_in">NSArray</span> *arr1 = @[];</span><br></pre></td></tr></table></figure>
+<p>####AlignConsecutiveDeclarations (<code>bool</code>)</p>
+<blockquote>
+<p>如果为真（true），对齐连续的声明<br>将多行连续代码的声明名称对齐</p>
+</blockquote>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//OC 上面真的好丑</span></span><br><span class="line"><span class="built_in">NSString</span> *          a = <span class="string">@"Hello World"</span>;</span><br><span class="line"><span class="built_in">NSString</span> *          e = <span class="string">@"asdasdasdad"</span>;</span><br><span class="line"><span class="built_in">NSAttributedString</span> *d = <span class="literal">nil</span>;</span><br><span class="line"><span class="keyword">int</span>                 b = <span class="number">66</span>;</span><br><span class="line"><span class="built_in">NSMutableArray</span> *    arr = <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *c = <span class="string">@"BiLi"</span>;</span><br><span class="line"><span class="built_in">NSArray</span> * arr1 = @[];</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>         aaaa = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">float</span>       b = <span class="number">23</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> ccc = <span class="number">23</span>;</span><br></pre></td></tr></table></figure>
+<p>####AlignEscapedNewlines (<code>EscapedNewlineAlignmentStyle</code>)✨</p>
+<blockquote>
+<p>在转义换行中对齐反斜杠的位置<br>三种样式 DontAlign,Left,Right</p>
+</blockquote>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DontAlign</span></span><br><span class="line"><span class="meta">#define A \</span></span><br><span class="line">  <span class="keyword">int</span> aaaa; \</span><br><span class="line">  <span class="keyword">int</span> b; \</span><br><span class="line">  <span class="keyword">int</span> dddddddddd;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// Left</span></span><br><span class="line"><span class="meta">#define A   \</span></span><br><span class="line">  <span class="keyword">int</span> aaaa; \</span><br><span class="line">  <span class="keyword">int</span> b;    \</span><br><span class="line">  <span class="keyword">int</span> dddddddddd;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// Right</span></span><br><span class="line"><span class="meta">#define A                                                                      \</span></span><br><span class="line">  <span class="keyword">int</span> aaaa;                                                                    \</span><br><span class="line">  <span class="keyword">int</span> b;                                                                       \</span><br><span class="line">  <span class="keyword">int</span> dddddddddd;</span><br></pre></td></tr></table></figure>
+<h4 id="AlignOperands-bool"><a href="#AlignOperands-bool" class="headerlink" title="AlignOperands (bool)"></a>AlignOperands (<code>bool</code>)</h4><blockquote>
+<p>如果为真，水平对齐二元和三元运算表达式。<br>具体来说，这是对一个表达式的操作数对齐，该表达式需要被分割成多行</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> aaa = bbbbbbbbbbbbbbb +</span><br><span class="line">          ccccccccccccccc;</span><br></pre></td></tr></table></figure>
+<p>####AlignTrailingComments (<code>bool</code>) ✨✨</p>
+<blockquote>
+<p>如果为真，对连续多行代码尾部注释对齐</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;   <span class="comment">//aaaa</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">10</span>;  <span class="comment">//bbbbb</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">999</span>; <span class="comment">//cccccccc</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> d = <span class="number">10000</span>;  <span class="comment">//ddddddd</span></span><br><span class="line"><span class="keyword">int</span> e = <span class="number">110000</span>; <span class="comment">//eeeeeeeee</span></span><br></pre></td></tr></table></figure>
+<p>####AllowAllParametersOfDeclarationOnNextLine (<code>bool</code>)</p>
+<blockquote>
+<p>如果函数声明不适合一行，允许将函数声明的所有参数放到下一行，即使BinPackParameters是假的。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myFunction</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> d, <span class="keyword">int</span> e)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="literal">false</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myFunction</span><span class="params">(<span class="keyword">int</span> a,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> b,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> c,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> d,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> e)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>####AllowShortBlocksOnASingleLine (bool)✨</p>
+<blockquote>
+<p>允许将简单的语句块放到一个单行.</p>
+</blockquote>
+<p><code>if (a) { return; }</code></p>
+<p>####AllowShortCaseLabelsOnASingleLine (bool)</p>
+<blockquote>
+<p>允许短的case标签放在同一行</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span>:                                   <span class="literal">false</span>:</span><br><span class="line"><span class="keyword">switch</span> (a) &#123;                    vs.     <span class="keyword">switch</span> (a) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>: x = <span class="number">1</span>; <span class="keyword">break</span>;                   <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span>;                           x = <span class="number">1</span>;</span><br><span class="line">&#125;                                         <span class="keyword">break</span>;</span><br><span class="line">                                        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                                          <span class="keyword">return</span>;</span><br><span class="line">                                        &#125;</span><br></pre></td></tr></table></figure>
+<p>####AllowShortFunctionsOnASingleLine ()</p>
+<blockquote>
+<p>根据<code>ShortFunctionStyle</code> 判断简单的方法 <code>int f() { return 0; }</code> 是否被压缩到一行<br>None：不处理<br>InlineOnly：类内定义的时候压缩 空函数不压缩<br>Empty：仅压缩空函数<br>Inline：类内定义的时候压缩 包括空函数<br>All:all</p>
+</blockquote>
+<p>####AllowShortIfStatementsOnASingleLine（<code>bool</code>）</p>
+<blockquote>
+<p>允许短的if语句保持在同一行</p>
+</blockquote>
+<p>####AllowShortLoopsOnASingleLine（<code>bool</code>）</p>
+<blockquote>
+<p>允许短的循环保持在同一行</p>
+</blockquote>
+<p>####AlwaysBreakAfterDefinitionReturnType</p>
+<blockquote>
+<p>总是在定义返回类型后换行(deprecated)</p>
+</blockquote>
+<p>####AlwaysBreakAfterReturnType（<code>ReturnTypeBreakingStyle</code>）</p>
+<blockquote>
+<p>总是在返回类型后换行<br>None, All<br>TopLevel：顶级函数，不包括在类中的函数<br>AllDefinitions：所有的定义，不包括声明<br>TopLevelDefinitions：所有的顶级函数的定义</p>
+</blockquote>
+<p>####AlwaysBreakBeforeMultilineStrings（<code>bool</code>）</p>
+<blockquote>
+<p>总是在多行string字面量前换行</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span>:                                  <span class="literal">false</span>:</span><br><span class="line">aaaa =                         vs.     aaaa = <span class="string">"bbbb"</span></span><br><span class="line">    <span class="string">"bbbb"</span>                                    <span class="string">"cccc"</span>;</span><br><span class="line">    <span class="string">"cccc"</span>;</span><br></pre></td></tr></table></figure>
+<p>####AlwaysBreakTemplateDeclarations（<code>BreakTemplateDeclarationsStyle</code>）</p>
+<blockquote>
+<p>总是在template声明后换行</p>
+</blockquote>
+<p>####BinPackArguments（bool）</p>
+<blockquote>
+<p>true 不处理 false表示函数实参要么都在同一行，要么都各自一行</p>
+</blockquote>
+<p>####BinPackParameters（bool）</p>
+<blockquote>
+<p>true 不处理 false表示所有形参要么都在同一行，要么都各自一行</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="杨林 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OC/" rel="tag"># OC</a>
+          
+            <a href="/tags/Format/" rel="tag"># Format</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/22/Clang-format 安装和初始化/" rel="next" title="Clang-format 安装和初始化">
+                <i class="fa fa-chevron-left"></i> Clang-format 安装和初始化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/git 设置代理/" rel="prev" title="git 设置代理">
+                git 设置代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://secure.gravatar.com/avatar/d3649231326efbdcb96c98a050b41d8f?s=200&d=identicon" alt="杨林">
+            
+              <p class="site-author-name" itemprop="name">杨林</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/HimmaHorde" title="GitHub &rarr; https://github.com/HimmaHorde" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:lin897839@gmail.com" title="E-Mail &rarr; mailto:lin897839@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/u/d2c069de1a7d" title="Weibo &rarr; https://www.jianshu.com/u/d2c069de1a7d" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AccessModifierOffset-int-✨"><span class="nav-number">1.</span> <span class="nav-text">AccessModifierOffset (int) ✨</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlignOperands-bool"><span class="nav-number">2.</span> <span class="nav-text">AlignOperands (bool)</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨林</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(function(item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'fRWuTjSEDqJWmB3DrTjX3Lsj-gzGzoHsz',
+      appKey: 'kp5uK2DcgdmK1KfHUgJcroep',
+      placeholder: '',
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

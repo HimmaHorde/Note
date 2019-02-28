@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[macOS 开发 - 设置壁纸]]></title>
+    <url>%2F2019%2F01%2F17%2FmacOS%20%E5%BC%80%E5%8F%91%20-%20%E8%AE%BE%E7%BD%AE%E5%A3%81%E7%BA%B8%2F</url>
+    <content type="text"><![CDATA[Mac 想要在代码中设置桌面壁纸需要使用到NSWorkspace这个类 NSWorkspace 简介NSWorkspace继承自NSObject，属于AppKit.framework。每个应用程序有一个共享的NSWorkspace对象 [NSWorkspace sharedWorkspace]NSWorkspace可以启动其他应用程序和执行各种文件处理服务。 获取当前桌面壁纸1234// 当前壁纸路径NSURL * url = [[NSWorkspace sharedWorkspace] desktopImageURLForScreen:[NSScreen mainScreen]];// 当前壁纸的配置包含 缩放类型（NSImageScaling） 比例缩放的剪切 填充颜色NSDictionary * options = [[NSWorkspace sharedWorkspace] desktopImageOptionsForScreen:[NSScreen mainScreen]]; 设置新的桌面壁纸1[[NSWorkspace sharedWorkspace] setDesktopImageURL:url forScreen:[NSScreen mainScreen] options:@&#123;NSWorkspaceDesktopImageScalingKey:@(NSImageScaleProportionallyUpOrDown)&#125; error:nil]; Mac 开发资料稀少，且行且珍惜。]]></content>
+      <categories>
+        <category>macOS开发</category>
+      </categories>
+      <tags>
+        <tag>桌面</tag>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[moetu 图床-星云壁纸]]></title>
+    <url>%2F2019%2F01%2F07%2Fmoetu%20%E5%9B%BE%E5%BA%8A-%E6%98%9F%E4%BA%91%E5%A3%81%E7%BA%B8%2F</url>
+    <content type="text"><![CDATA[moetu 图床图片测试]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>图床</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[配置 Git 的 ssh 命令]]></title>
+    <url>%2F2019%2F01%2F07%2F%E9%85%8D%E7%BD%AE%20Git%20%E7%9A%84%20ssh%20%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[常用命令1234# 复制 SSH key 到剪贴板pbcopy &lt; ~/.ssh/id_rsa.pub# 测试连接ssh -T git@github.com 查看文档12man sshman ssh_config SSH 代理设置设置 ssh_config 文件1ProxyCommand nc -v -x 127.0.0.1:1086 %h %p 将SSH密钥添加到SSH代理 启动服务 12$ eval &quot;$(ssh-agent -s)&quot;Agent pid 59566 设置 ~/.ssh/config 文件 1234Host * AddKeysToAgent yes UseKeychain yes IdentityFile ~/.ssh/id_rsa 将SSH私钥添加到SSH代理，并将密码存储在密钥链中 1$ ssh-add -K ~/.ssh/id_rsa GitHub 文档]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>命令</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git 设置代理]]></title>
+    <url>%2F2019%2F01%2F05%2Fgit%20%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%2F</url>
+    <content type="text"><![CDATA[今天 ssh clone 个库卡到想哭，直接开启翻墙工具没有效果，一顿折腾总算解决。 环境MAC 命令行 git 使用代理（Shadowsocks） 配置 http 代理12$ git config --global http.proxy http://127.0.0.1:1087$ git config --global https.proxy http://127.0.0.1:1087 如果你使用的是 SOCKS5 代理12$ git config --global http.proxy 'socks5://127.0.0.1:1086'$ git config --global https.proxy 'socks5://127.0.0.1:1086' 取消 http 代理12$ git config --global --unset http.proxy$ git config --global --unset https.proxy 查看 http 代理12$ git config --global --get http.proxy$ git config --global --get https.proxy 查看 git 设置1$ git config --list Git 的 SSH 代理通过修改 ssh_config 文件实现代理12345# Github 配置 Scoket5代理Host github.com HostName github.com IdentityFile ~/.ssh/id_rsa ProxyCommand nc -v -x 127.0.0.1:1086 %h %p 目录位置 /etc/ssh/ssh_config或~/.ssh/config（不存在就自己新建个） nc全名 NetCat ，Unix 网络工具，可以用作端口监听、端口扫描、远程文件传输、远程 shell 、模拟 TCP 等。 -v -x-x 代理地址:端口-v 日志输入-X 代理协议 4(SOCKS4)、5(SOCKS5)、connect(HTTPS proxy) 默认 5 eg. ProxyCommand nc -v -X connect -x 127.0.0.1:1086 %h %p 其他命令介绍 %h %ph -&gt; host 地址p -&gt; port 端口]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Clang-format 模板]]></title>
+    <url>%2F2018%2F12%2F22%2FClang-format%20%E6%A8%A1%E6%9D%BF%2F</url>
+    <content type="text"><![CDATA[Clang-format 配置解读，更好选择自己所需要的格式规范123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206---# 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProtoLanguage: ObjC# 访问说明符(public、private等)的偏移AccessModifierOffset: -4# 开括号(开圆括号、开尖括号、开方括号)后的对齐AlignAfterOpenBracket: DontAlign# 连续赋值时，等号对齐AlignConsecutiveAssignments: true# 连续声明时，对齐所有声明的变量名AlignConsecutiveDeclarations: true# define 换行时反斜杠位置：左对齐AlignEscapedNewlines: Left# 水平对齐二元和三元表达式的操作数AlignOperands: true# 连续代码的尾部注释对齐AlignTrailingComments: true# 允许短代码块放在同一行 if 1 &#123; return; &#125;AllowShortBlocksOnASingleLine: false# 允许短的case标签放在同一行AllowShortCaseLabelsOnASingleLine: false# 允许短的函数放在同一行AllowShortFunctionsOnASingleLine: All# 允许短的if语句保持在同一行AllowShortIfStatementsOnASingleLine: false# 允许短的循环保持在同一行AllowShortLoopsOnASingleLine: false# 总是在返回类型后换行AlwaysBreakAfterReturnType: None# 总是在多行string字面量前换行AlwaysBreakBeforeMultilineStrings: false# 总是在template声明后换行AlwaysBreakTemplateDeclarations: MultiLine# false表示函数实参要么都在同一行，要么都各自一行BinPackArguments: false# false表示所有形参要么都在同一行，要么都各自一行BinPackParameters: false# 在大括号前换行: Attach(始终将大括号附加到周围的上下文), Linux(除函数、命名空间和类定义，与Attach类似), # Mozilla(除枚举、函数、记录定义，与Attach类似), Stroustrup(除函数定义、catch、else，与Attach类似), # Allman(总是在大括号前换行), GNU(总是在大括号前换行，并对于控制语句的大括号增加额外的缩进), WebKit(在函数前换行), Custom# 注：这里认为语句块也属于函数BreakBeforeBraces: Custom# 大括号换行，只有当BreakBeforeBraces设置为Custom时才有效BraceWrapping: # class定义后面 AfterClass: false # 控制语句后面 AfterControlStatement: false # enum定义后面 AfterEnum: false # 函数定义后面clang-format version 8.0.0 (tags/google/stable/2018-12-18) (此版本之后 OC 可用) AfterFunction: true # 命名空间定义后面 AfterNamespace: false # OC 定义后面 AfterObjCDeclaration: false # struct定义后面 AfterStruct: false # union定义后面 AfterUnion: false # entern定义后面 AfterExternBlock: false # catch之前 BeforeCatch: false # else之前 BeforeElse: false # 缩进大括号 IndentBraces: false #false 时，空方法体 &#123;&#125; 放在一行 SplitEmptyFunction: true #false 时，空记录（例如，类，结构或联合）&#123;&#125; 放在一行 SplitEmptyRecord: true # false 且 AfterNamespace == true 时 空命名空间体可放到一行: &#123;&#125; SplitEmptyNamespace: true# 在二元运算符前换行: None(在操作符后换行), NonAssignment(在非赋值的操作符前换行), All(在操作符前换行) BreakBeforeBinaryOperators: All# 三元运算符 true 符号前换行 false 符号后换行BreakBeforeTernaryOperators: true# 继承时 BeforeColon ‘：’前换行BreakInheritanceList: BeforeColon# 在构造函数的初始化列表的逗号前换行BreakConstructorInitializers: BeforeComma# 在Java文件中的字段上的每个注释之后中断。BreakAfterJavaFieldAnnotations: false# Allow breaking string literals when formatting.BreakStringLiterals: true# 每行字符的限制，0表示没有限制ColumnLimit: 0# 描述具有特殊意义的注释的正则表达式，它不应该被分割为多行或以其它方式改变CommentPragmas: '^ IWYU pragma:'# true，连续的名称空间声明将位于同一行。如果为false，则在新行上声明每个名称空间。CompactNamespaces: false# 构造函数的初始化列表要么都在同一行，要么都各自一行ConstructorInitializerAllOnOneLineOrOnePerLine: false# 构造函数的初始化列表的缩进宽度ConstructorInitializerIndentWidth: 4# 延续的行的缩进宽度ContinuationIndentWidth: 4# 去除C++11的列表初始化的大括号&#123;后和&#125;前的空格Cpp11BracedListStyle: false# 继承最常用的指针和引用的对齐方式DerivePointerAlignment: false# 关闭格式化DisableFormat: false# 自动检测函数的调用和定义是否被格式为每行一个参数(Experimental)ExperimentalAutoDetectBinPacking: false# true 自动检测补全命名空间尾部的大括号FixNamespaceComments: false# 需要被解读为foreach循环而不是函数调用的宏ForEachMacros: - foreach - Q_FOREACH - BOOST_FOREACH# #include 分组排序方式 Preserve(按组排序) Merge（合并成一组排序）Regroup（按 IncludeCategories 重新分组排序）IncludeBlocks: PreserveIncludeCategories: - Regex: '^"(llvm|llvm-c|clang|clang-c)/' Priority: 2 - Regex: '^(&lt;|"(gtest|gmock|isl|json)/)' Priority: 3 - Regex: '.*' Priority: 1# Specify a regular expression of suffixes that are allowed in the file-to-main-include mapping.IncludeIsMainRegex: '(Test)?$'# case 是否缩进一级IndentCaseLabels: true# 预处理代码缩进样式。None（不缩进）AfterHash（缩进）IndentPPDirectives: None# 缩进宽度IndentWidth: 4# 函数在返回类型后换行，是否缩进函数名IndentWrappedFunctionNames: false# JS 引号样式 Leave("",'') Single("") Double("")JavaScriptQuotes: Leave# JS import 是否需要换行JavaScriptWrapImports: true# 保留在块开始处的空行(OC 没用)KeepEmptyLinesAtTheStartOfBlocks: true# 开始一个块的宏的正则表达式MacroBlockBegin: ''# 结束一个块的宏的正则表达式MacroBlockEnd: ''# 连续最大空行数MaxEmptyLinesToKeep: 1# 命名空间的缩进: None, Inner(缩进嵌套的命名空间中的内容), AllNamespaceIndentation: Inner# OC 协议根据 ColumnLimit 长度 换行ObjCBinPackProtocolList: Auto# 使用 OC block 函数实现内部缩进宽度ObjCBlockIndentWidth: 4# 在ObjC的@property后添加一个空格ObjCSpaceAfterProperty: true# 在OC的protocol列表前添加一个空格ObjCSpaceBeforeProtocolList: truePenaltyBreakAssignment: 2PenaltyBreakBeforeFirstCallParameter: 19PenaltyBreakComment: 300PenaltyBreakFirstLessLess: 120PenaltyBreakString: 1000PenaltyBreakTemplateDeclaration: 10PenaltyExcessCharacter: 1000000PenaltyReturnTypeOnItsOwnLine: 60# 指针和引用的对齐: Left（int* a;）, Right（int *a;）, Middle（int * a;）PointerAlignment: Right# 允许重新排版注释ReflowComments: true# 允许排序#include,首字母排序SortIncludes: true# true using 自动排序SortUsingDeclarations: false# 在C风格类型转换后添加空格SpaceAfterCStyleCast: false# template 关键字后添加空格SpaceAfterTemplateKeyword: true# false 移除 = += 两侧的空格SpaceBeforeAssignmentOperators: true# 初始化 c++ 11 对象的前面空格SpaceBeforeCpp11BracedList: true# 构造函数：前加空格SpaceBeforeCtorInitializerColon: true# 继承的：前面加空格SpaceBeforeInheritanceColon: true# 开圆括号之前添加一个空格: Never, ControlStatements, AlwaysSpaceBeforeParens: ControlStatements# false 清除 for 循环:前面的空格 for (auto v : values) &#123;&#125; SpaceBeforeRangeBasedForLoopColon: true# 在空的圆括号中添加空格SpaceInEmptyParentheses: false# 在尾随的评论前添加的空格数(只适用于//)SpacesBeforeTrailingComments: 1# 在尖括号内部前后添加空格 &lt; int &gt;SpacesInAngles: false# 快捷数组 内部加空格 [ 1, 2, 3 ]; ：前加空格 f(&#123;a : 1, b : 2, c : 3&#125;);SpacesInContainerLiterals: false# 在C风格类型转换的括号中添加空格SpacesInCStyleCastParentheses: false# 在圆括号的(后和)前添加空格SpacesInParentheses: false# 在方括号的[后和]前添加空格，lamda表达式和未指明大小的数组的声明不受影响SpacesInSquareBrackets: false# 标准: Cpp03, Cpp11, AutoStandard: Cpp11# tab宽度TabWidth: 4UseTab: Never... ##实例 AccessModifierOffset (int) ✨ 修饰符缩进 1234567//AccessModifierOffset: 0 @public NSMutableArray *_dataArray; //AccessModifierOffset: -4@public NSMutableArray *_dataArray; ####AlignAfterOpenBracket (BracketAlignmentStyle) 设置括号内参数水平分布方式 三种样式 Align，DontAlign，AlwaysBreak 1234567891011//Align 样式，参数对齐左括号someLongFunction(argument1, argument2); //DontAlign 样式，不要对齐，换行使用 ContinuationIndentWidth 参数someLongFunction(argument1, argument2); //AlwaysBreak 样式，在左圆括号后总是换行, 如果参数不能适应单行someLongFunction( argument1, argument2); ####AlignConsecutiveAssignments (bool) ✨✨ 如果为真（true），对齐连续的赋值将多行代码的赋值符号对齐(🤔连续没有空白行的代码块就等号对齐) 123456NSString *a = @"Hello World";int b = 66;NSMutableArray *arr = nil;NSString *c = @"BiLi";NSArray *arr1 = @[]; ####AlignConsecutiveDeclarations (bool) 如果为真（true），对齐连续的声明将多行连续代码的声明名称对齐 123456789//OC 上面真的好丑NSString * a = @"Hello World";NSString * e = @"asdasdasdad";NSAttributedString *d = nil;int b = 66;NSMutableArray * arr = nil;NSString *c = @"BiLi";NSArray * arr1 = @[]; 123int aaaa = 12;float b = 23;std::string ccc = 23; ####AlignEscapedNewlines (EscapedNewlineAlignmentStyle)✨ 在转义换行中对齐反斜杠的位置三种样式 DontAlign,Left,Right 1234567891011121314151617// DontAlign#define A \ int aaaa; \ int b; \ int dddddddddd; // Left#define A \ int aaaa; \ int b; \ int dddddddddd; // Right#define A \ int aaaa; \ int b; \ int dddddddddd; AlignOperands (bool) 如果为真，水平对齐二元和三元运算表达式。具体来说，这是对一个表达式的操作数对齐，该表达式需要被分割成多行 12int aaa = bbbbbbbbbbbbbbb + ccccccccccccccc; ####AlignTrailingComments (bool) ✨✨ 如果为真，对连续多行代码尾部注释对齐 123456int a = 1; //aaaaint b = 10; //bbbbbint c = 999; //ccccccccint d = 10000; //dddddddint e = 110000; //eeeeeeeee ####AllowAllParametersOfDeclarationOnNextLine (bool) 如果函数声明不适合一行，允许将函数声明的所有参数放到下一行，即使BinPackParameters是假的。 12345678910true:void myFunction( int a, int b, int c, int d, int e);false:void myFunction(int a, int b, int c, int d, int e); ####AllowShortBlocksOnASingleLine (bool)✨ 允许将简单的语句块放到一个单行. if (a) { return; } ####AllowShortCaseLabelsOnASingleLine (bool) 允许短的case标签放在同一行 12345678true: false:switch (a) &#123; vs. switch (a) &#123;case 1: x = 1; break; case 1:case 2: return; x = 1;&#125; break; case 2: return; &#125; ####AllowShortFunctionsOnASingleLine () 根据ShortFunctionStyle 判断简单的方法 int f() { return 0; } 是否被压缩到一行None：不处理InlineOnly：类内定义的时候压缩 空函数不压缩Empty：仅压缩空函数Inline：类内定义的时候压缩 包括空函数All:all ####AllowShortIfStatementsOnASingleLine（bool） 允许短的if语句保持在同一行 ####AllowShortLoopsOnASingleLine（bool） 允许短的循环保持在同一行 ####AlwaysBreakAfterDefinitionReturnType 总是在定义返回类型后换行(deprecated) ####AlwaysBreakAfterReturnType（ReturnTypeBreakingStyle） 总是在返回类型后换行None, AllTopLevel：顶级函数，不包括在类中的函数AllDefinitions：所有的定义，不包括声明TopLevelDefinitions：所有的顶级函数的定义 ####AlwaysBreakBeforeMultilineStrings（bool） 总是在多行string字面量前换行 1234true: false:aaaa = vs. aaaa = "bbbb" "bbbb" "cccc"; "cccc"; ####AlwaysBreakTemplateDeclarations（BreakTemplateDeclarationsStyle） 总是在template声明后换行 ####BinPackArguments（bool） true 不处理 false表示函数实参要么都在同一行，要么都各自一行 ####BinPackParameters（bool） true 不处理 false表示所有形参要么都在同一行，要么都各自一行]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Format</tag>
+        <tag>翻译</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Clang-format 安装和初始化]]></title>
+    <url>%2F2018%2F12%2F22%2FClang-format%20%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[环境 MacOs10.14 ####Clang-format 安装 123456//安装命令$ brew install clang-format//查看版本$ clang-format -version //输出信息 clang-format version 8.0.0 (tags/google/stable/2018-10-04) ####生成配置文件 .clang-format 123//生成基于 LLVM 的配置文件clang-format -style=LLVM -dump-config &gt; .clang-format//-style=LLVM|Google|Chromium|Mozilla|Webkit style 默认有五种风格分别是LLVM|Google|Chromium|Mozilla|Webkit ####修改语言.clang-format 默认 language 是 cpp 12345678---Language: Cpp# BasedOnStyle: LLVMAccessModifierOffset: -2AlignAfterOpenBracket: AlignAlignConsecutiveAssignments: falseAlignConsecutiveDeclarations: falseAlignEscapedNewlines: Right 将 Cpp 改为你用的语言,例如 OC ，language 就是 ObjC 配置名称 适用语言 Cpp C, C++ Java Java JavaScript JavaScript ObjC Objective-C, Objective-C++ Proto Protocol Buffers TableGen TableGen LK_TextProto TextProto ####格式化格式化单个文件clang-format -i ProductDescController.m 格式化文件夹下.h .m 文件clang-format -i 文件夹/*.{h,m} 格式化文件夹和其子文件夹下的所有.h .m 文件find . -name &quot;*.[hm]&quot; |xargs clang-format -i 重要说明网上搜到很多资料里都解释说 xargs是个文件夹，这里纠错下，xargs 是个命令，它的作用是将参数列表转换成小块分段传递给其他命令 find . -name “*.[hm]” 查询所有的.h.m 文件效果可参考以下代码 1find . -name "*.[hm]" -print clang-format 格式化没什么多说的，会自动向上遍历.clang-format文件 作为格式化配置 ####官方文档点击这里]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Format</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NSURLSession 每个 host 最大连接数]]></title>
+    <url>%2F2018%2F12%2F21%2FNSURLSession%20%E6%AF%8F%E4%B8%AA%20host%20%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[NSURLSession 默认对每个 host 有最大并发连接限制，Mac 默认值为6，iOS 默认值为4 文档123456789NSURLSessionNSURLSessionConfigurationHTTPMaximumConnectionsPerHostThis property determines the maximum number of simultaneous connections made to each host by tasks within sessions based on this configuration.This limit is per session, so if you use multiple sessions, your app as a whole may exceed this limit. Additionally, depending on your connection to the Internet, a session may use a lower limit than the one you specify.The default value is 6 in macOS, or 4 in iOS. 默认值 macOS 6 ，iOS 4]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>URLSession</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[guard]]></title>
+    <url>%2F2018%2F12%2F21%2Fguard%20%2F</url>
+    <content type="text"><![CDATA[在 GitHub 上看到这段代码感觉很有意思，自己有思考验证了一下 猜想和实践 为了方便区分 我这里用 t 、s 区分命名 s 应该是 Optional&lt;Shape&gt; 类型,t 是Shape类型 guard 之后 s 应该继续存在内存中 赋值后 t,s 内存关系。。。不太确定 1234567891011var s1:Shape? = Shape()s1?.numberOfSides = 100func showInfo(s:Shape?) &#123; print(type(of: s)) guard let t = s else &#123; return &#125; print(type(of: t))&#125; showInfo(s: s1) 打印结果 和 内存 12345678910Optional&lt;Shape&gt;Shape//控制台打印的内存信息Printing description of s:▿ Optional&lt;Shape&gt; ▿ some : &lt;Shape: 0x60000325fea0&gt; Printing description of t:&lt;Shape: 0x60000325fea0&gt; 可以看到的是 s 仍然存在 并且 s 和 t 引用同一块地址 👍]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[OC 转 Swift 之 String]]></title>
+    <url>%2F2018%2F12%2F20%2FOC%20%E8%BD%AC%20Swift%20%E4%B9%8B%20String%2F</url>
+    <content type="text"><![CDATA[String 和 NSString123456//初始化 NSStringlet aa:NSString = "hello"//NSString 转 Stringlet bb = String(aa);//String 转 NSStringlet cc = NSString(string: bb) String 特点 以下描述 String 语法都是基于 Swift4.2 字符串是由一系列字符组成，比如 「hello， world」 或 「albatross」 。 Swift 字符串是由 String 类型来表示。 String 的内容可以用多种方式读取，包括作为一个 Character 值的集合。 字符串是值类型Swift 中的 String 类型是一种 值类型 。如果你创建了一个新的 String 值， String 值在传递给方法或者函数时会被 拷贝，在给常量或者变量赋值的时候也是一样 字符计数在一个字符串中使用 count 属性去计算 Character 类型值个数 12let aa = "A你好⚾️✝️✡️"print(aa.count) //aa.count == 6 ##String 字符串索引 每个 String 值都有一个关联的 索引类型， String.Index，对应着字符串中每个 Character 的位置。 正如上面提到的，不同的字符可能需要不同大小的内存存储，所以为了确定每个 Character 的具体位置，你必须从 String 的开头遍历每个 Unicode 标量到结束。因此，Swift 字符串不能使用整型值索引。 String.Index 是个结构体类型！！！ 这是个类型 标记字符在字符串中的位置 startIndex endIndex String 对象的两个属性，分别代表第一和最后一个字符的位置 String 取子字符串String 可以通过下标的方式快速取出一个 Substring 类型的实例。！！实际使用中需要将Substring 对象转化为 String 类型。 123456789let greeting = "Hello, world!"let start = greeting.startIndexlet end = greeting.index(start, offsetBy: 5)let subString = greeting[start..&lt;end]// subString 的值是 "Hello"// 把结果转化为 String 以便长期存储。let newString = String(subString) 为什么返回值是 Substring，Substring 可以重用原 String 的内存空间 有利于性能的优化 String 拓展123456789101112//下标直接取字符串public extension String &#123; subscript (i: Int) -&gt; String &#123; return String(self[index(startIndex, offsetBy: i)]) &#125; // subscript (r:Range&lt;Int&gt;) -&gt; String &#123; let start = index(startIndex, offsetBy: r.lowerBound) let end = index(startIndex, offsetBy: r.upperBound) return String(self[start ..&lt; end]) &#125;&#125; ###使用1234let greeting = "Hello, world!"_ = greeting[0] // H_ = greeting[0..&lt;5] // Hello]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS 观察者模式 object 的作用]]></title>
+    <url>%2F2018%2F12%2F18%2FiOS%20%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%20object%20%E7%9A%84%E4%BD%9C%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[根据 object 过滤观察者收到的通知1- (void)addObserver:(id)observer selector:(SEL)aSelector name:(NSNotificationName)aName object:(id)anObject; 文档1234567891011121314151617181920ParametersobserverObject registering as an observer.&lt;!-- 观察者--&gt;aSelectorSelector that specifies the message the receiver sends observer to notify it of the notification posting. The method specified by aSelector must have one and only one argument (an instance of NSNotification).&lt;!-- 收到通知后调用观察者的方法，方法有且只有一个 Notifation 类型的参数 --&gt;aNameThe name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.&lt;!-- 通知的名称，观察者只接收和这个名字相同的通知--&gt;If you pass nil, the notification center doesn’t use a notification’s name to decide whether to deliver it to the observer.&lt;!-- name 为空，通知中心不已 name 为依据发送通知 --&gt;anObjectThe object whose notifications the observer wants to receive; that is, only notifications sent by this sender are delivered to the observer.&lt;!-- 观察者想要接收其通知的对象，只有这个对象发送的通知才会传递给观察者。--&gt;If you pass nil, the notification center doesn’t use a notification’s sender to decide whether to deliver it to the observer.&lt;!-- object 为 nil 表示表示接受所有发送者的消息 --&gt; 举个例子123456//定义两个对象_p = [[Person alloc] init];_p.name = @&quot;111&quot;;_p2 = [[Person alloc] init];_p2.name = @&quot;222&quot;; 123456789101112131415161718#import &quot;Person.h&quot;@implementation Person- (instancetype)init&#123; self = [super init]; if (self) &#123; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextChanged:) name:@&quot;NotificationNameTest&quot; object:self]; &#125; return self;&#125;- (void)handleTextChanged:(NSNotification *)sender&#123; NSLog(@&quot;name = %@no = %@&quot;,_name,sender);&#125;@end 发送以下通知 1234[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;NotificationNameTest&quot; object:_p];//_p 收到通知并打印[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;NotificationNameTest&quot; object:nil];// _p,_p2 都未收到通知]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>KVO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo常用命令]]></title>
+    <url>%2F2018%2F11%2F26%2Fhexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[安装和更新npm install -g hexo-cli 生成静态页hexo generate 发布到 githexo deploy 本地服务器测试运行hexo server 创建新文章hexo new [layout] &lt;title&gt;]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>命令</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo 介绍]]></title>
+    <url>%2F2018%2F11%2F26%2Fhexo%20%E4%BB%8B%E7%BB%8D%2F</url>
+    <content type="text"><![CDATA[什么是hexoHexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装和更新npm install -g hexo-cli 生成静态页hexo generate 发布到 githexo deploy 本地服务器测试运行hexo server 创建新文章hexo new [layout] &lt;title&gt;]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hugging Compression]]></title>
+    <url>%2F2018%2F11%2F23%2FHuggingPriority-CompressionResistance%2F</url>
+    <content type="text"><![CDATA[AutoLayout 的 content 自身大小计算 setContentHuggingPriorityhug -&gt; vt. 拥抱；紧抱；抱有，坚持 值越大越不容易被拉伸 setContentCompressionResistancePriorityCompression -&gt; n. 压缩，浓缩；压榨，压迫 值越大越不容易被压缩 相关代码12345- (UILayoutPriority)contentHuggingPriorityForAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (void)setContentHuggingPriority:(UILayoutPriority)priority forAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (UILayoutPriority)contentCompressionResistancePriorityForAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0);- (void)setContentCompressionResistancePriority:(UILayoutPriority)priority forAxis:(UILayoutConstraintAxis)axis NS_AVAILABLE_IOS(6_0); 时间长就容易记混的概念,忘了就翻出来看看]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>UILabel</tag>
+        <tag>AutoLayout</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[addObserver 监听属性导致崩溃]]></title>
+    <url>%2F2018%2F08%2F31%2FaddObserver%20%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7%E5%AF%BC%E8%87%B4%E5%B4%A9%E6%BA%83%2F</url>
+    <content type="text"><![CDATA[iOS KVO 监听对象属性的时候莫名其妙崩溃解决办法1- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context context 不要为空随便写点什么或者 使用下面的方式来定义唯一的 context 12void *RandomContext = &amp;RandomContext;[self addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:RandomContext];]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Note</tag>
+        <tag>KVO</tag>
+        <tag>Crash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[输入框限制输入字数上限 textview 和 textField]]></title>
+    <url>%2F2018%2F06%2F27%2F%E8%BE%93%E5%85%A5%E6%A1%86%E9%99%90%E5%88%B6%E8%BE%93%E5%85%A5%E5%AD%97%E6%95%B0%E4%B8%8A%E9%99%90%20%20textview%20%E5%92%8C%20textField%2F</url>
+    <content type="text"><![CDATA[iOS输入框的文字长度限制很烦人，所以在这里进行一些简单的封装 123456789/** 最大文字长度限制 */@property (nonatomic, assign) IBInspectable NSInteger maximumTextLength;/** 文字长度改变后回调函数 */@property (nonatomic, copy) void (^textLengthDidChanged)(NSInteger length); maximumTextLength 文字长度限制 textLengthDidChanged 长度改变时的回调，返回当前的长度 没有添加当前文字个数展示的 Label，建议这部分定义 GitHub链接直达 TextView 实现12345678910111213141516171819- (void)setup&#123; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChange) name:UITextViewTextDidChangeNotification object:nil];&#125;- (void)didChange&#123; //有高亮文字 if (self.markedTextRange &amp;&amp; !self.markedTextRange.empty) &#123; return ; &#125; if (self.maximumTextLength == 0) &#123; return ; &#125; _textLengthDidChanged?_textLengthDidChanged(MIN(self.text.length, self.maximumTextLength)):nil; if (self.text.length &gt; self.maximumTextLength) &#123; self.text = [self.text substringToIndex:self.maximumTextLength]; &#125;&#125; TextField 实现123456789101112131415161718192021-(void)setup&#123; [self addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];&#125;- (void)textDidChange:(UITextField *)textField&#123; UITextRange *selectedRange = textField.markedTextRange; UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0]; if (position) &#123; return ; &#125; if (self.maximumTextLength == 0) &#123; return ; &#125; _textLengthDidChanged?_textLengthDidChanged(MIN(self.text.length, self.maximumTextLength)):nil; if (textField.text.length &gt; self.maximumTextLength) &#123; textField.text = [textField.text substringToIndex:self.maximumTextLength]; &#125;&#125;]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Swift</tag>
+        <tag>TextField</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HMSegmentedControl 汉化]]></title>
+    <url>%2F2018%2F06%2F27%2FHMSegmentedControl%20%E6%B1%89%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[GitHub直达 汉化增强版地址123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227228229230231232233234235236237238239240241242243244245246247248249250251252253254255256257258259260261262263264265266267268269270271272273274275276277278279280//// HMSegmentedControl.h// HMSegmentedControl//// Created by Hesham Abd-Elmegid on 23/12/12.// Copyright (c) 2012-2015 Hesham Abd-Elmegid. All rights reserved.//#import &lt;UIKit/UIKit.h&gt;@class HMSegmentedControl;typedef void (^IndexChangeBlock)(NSInteger index);typedef NSAttributedString *(^HMTitleFormatterBlock)(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected);///指示器的类型typedef NS_ENUM(NSInteger, HMSegmentedControlSelectionStyle) &#123; HMSegmentedControlSelectionStyleTextWidthStripe, // 指示器的宽度和文字的宽度相同 HMSegmentedControlSelectionStyleFullWidthStripe, // 指示器的宽度和segment的宽度相同 HMSegmentedControlSelectionStyleBox, // 覆盖整个segment的矩形 HMSegmentedControlSelectionStyleArrow // 三角小箭头 ，三角的方向取决于HMSegmentedControlSelectionIndicatorLocation&#125;;///指示器的位置typedef NS_ENUM(NSInteger, HMSegmentedControlSelectionIndicatorLocation) &#123; HMSegmentedControlSelectionIndicatorLocationUp, HMSegmentedControlSelectionIndicatorLocationDown, HMSegmentedControlSelectionIndicatorLocationNone ///&lt; 不显示指示器&#125;;typedef NS_ENUM(NSInteger, HMSegmentedControlSegmentWidthStyle) &#123; HMSegmentedControlSegmentWidthStyleFixed, ///&lt; Segment 宽度平分 HMSegmentedControlSegmentWidthStyleDynamic, ///&lt; Segment 宽度等于文字的宽度 包含 inset&#125;;typedef NS_OPTIONS(NSInteger, HMSegmentedControlBorderType) &#123; HMSegmentedControlBorderTypeNone = 0, HMSegmentedControlBorderTypeTop = (1 &lt;&lt; 0), HMSegmentedControlBorderTypeLeft = (1 &lt;&lt; 1), HMSegmentedControlBorderTypeBottom = (1 &lt;&lt; 2), HMSegmentedControlBorderTypeRight = (1 &lt;&lt; 3)&#125;;//数值为 -1 表示不选中任意 segmentenum &#123; HMSegmentedControlNoSegment = -1 // Segment index for no selected segment&#125;;/** Segment 类型 - HMSegmentedControlTypeText: 文字类型 （默认） - HMSegmentedControlTypeImages: 图片类型 - HMSegmentedControlTypeTextImages: 图文类型 */typedef NS_ENUM(NSInteger, HMSegmentedControlType) &#123; HMSegmentedControlTypeText, HMSegmentedControlTypeImages, HMSegmentedControlTypeTextImages&#125;;///图片位置typedef NS_ENUM(NSInteger, HMSegmentedControlImagePosition) &#123; HMSegmentedControlImagePositionBehindText, ///&lt;图片在文字后面（文字和图片重叠） HMSegmentedControlImagePositionLeftOfText, ///&lt;图片在文字左面 HMSegmentedControlImagePositionRightOfText, ///&lt;图片在文字右面 HMSegmentedControlImagePositionAboveText, ///&lt;图片在文字上面 HMSegmentedControlImagePositionBelowText ///&lt;图片在文字下面&#125;;@interface HMSegmentedControl : UIControl@property (nonatomic, strong) NSArray&lt;NSString *&gt; *sectionTitles;@property (nonatomic, strong) NSArray&lt;UIImage *&gt; *sectionImages;@property (nonatomic, strong) NSArray&lt;UIImage *&gt; *sectionSelectedImages;///点击回调函数 替代 addTarget:action:forControlEvents:@property (nonatomic, copy) IndexChangeBlock indexChangeBlock;@property (nonatomic, assign) BOOL repetClick;/** 用于自定义标题样式 根据现有title 返回一个NSAttributedString */@property (nonatomic, copy) HMTitleFormatterBlock titleFormatter;/** 设置未选中状态的文本样式 */@property (nonatomic, strong) NSDictionary *titleTextAttributes UI_APPEARANCE_SELECTOR;/* 设置未选中状态的文本样式 */@property (nonatomic, strong) NSDictionary *selectedTitleTextAttributes UI_APPEARANCE_SELECTOR;/** Segmented control 背景颜色 */@property (nonatomic, strong) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;/** 选中时指示器的颜色 Default is `R:52, G:181, B:229` */@property (nonatomic, strong) UIColor *selectionIndicatorColor UI_APPEARANCE_SELECTOR;/** 选中时指示器的矩形的颜色 Default is selectionIndicatorColor */@property (nonatomic, strong) UIColor *selectionIndicatorBoxColor UI_APPEARANCE_SELECTOR;/** 矩形指示器色块的透明度 Default is `0.2f` */@property (nonatomic) CGFloat selectionIndicatorBoxOpacity;/** segments 之间 间隔线的颜色 默认 黑色 */@property (nonatomic, strong) UIColor *verticalDividerColor UI_APPEARANCE_SELECTOR;/** 是否显示 segments 之间的竖线 默认为 NO */@property(nonatomic, getter = isVerticalDividerEnabled) BOOL verticalDividerEnabled;/** segments 之间竖线的宽度 Default is `1.0f` */@property (nonatomic, assign) CGFloat verticalDividerWidth;/** 指定 SegmentControl 样式 Default is `HMSegmentedControlTypeText` */@property (nonatomic, assign) HMSegmentedControlType type;/** 指定 指示器的样式 默认是和文字等宽 */@property (nonatomic, assign) HMSegmentedControlSelectionStyle selectionStyle;/** 指定 segment 的宽度计算样式 默认平分宽度 */@property (nonatomic, assign) HMSegmentedControlSegmentWidthStyle segmentWidthStyle;/** 选择指示器的位置 默认在上 */@property (nonatomic, assign) HMSegmentedControlSelectionIndicatorLocation selectionIndicatorLocation;/* 指定 border 样式 默认 不显示 none */@property (nonatomic, assign) HMSegmentedControlBorderType borderType;/** 指定图片位置 仅对HMSegmentedControlTypeTextImages类型的设置有效 默认文字覆盖在图片上 */@property (nonatomic) HMSegmentedControlImagePosition imagePosition;/** 指定图片和文字之间的间距 仅对HMSegmentedControlTypeTextImages类型的设置有效 默认为 0 */@property (nonatomic) CGFloat textImageSpacing;/** 指定 border 的颜色 Default is `[UIColor blackColor]` */@property (nonatomic, strong) UIColor *borderColor;/** 指定border的宽度 Default is `1.0f` */@property (nonatomic, assign) CGFloat borderWidth;/** 设置是否准许用户拖拽 */@property(nonatomic, getter = isUserDraggable) BOOL userDraggable;/** Default is YES. Set to NO to deny any touch events by the user. */@property(nonatomic, getter = isTouchEnabled) BOOL touchEnabled;@property (nonatomic, getter=shouldStretchSegmentsToScreenSize) BOOL stretchSegmentsToScreenSize;/** 选中 segment 的 index */@property (nonatomic, assign) NSInteger selectedSegmentIndex;/** 指示器的高度 Only effective when `HMSegmentedControlSelectionStyle` is either `HMSegmentedControlSelectionStyleTextWidthStripe` or `HMSegmentedControlSelectionStyleFullWidthStripe`. Default is 5.0 */@property (nonatomic, readwrite) CGFloat selectionIndicatorHeight;///指示器圆角@property (nonatomic, assign) BOOL indicatorCorner;///box 圆角@property (nonatomic, assign) BOOL boxCorner;/** Edge insets for the selection indicator. NOTE: This does not affect the bounding box of HMSegmentedControlSelectionStyleBox When HMSegmentedControlSelectionIndicatorLocationUp is selected, bottom edge insets are not used When HMSegmentedControlSelectionIndicatorLocationDown is selected, top edge insets are not used Defaults are top: 0.0f left: 0.0f bottom: 0.0f right: 0.0f */@property (nonatomic, readwrite) UIEdgeInsets selectionIndicatorEdgeInsets;/// 指定指示器左右两边比文字多出或减少的距离 只对 HMSegmentedControlTypeText 设置有效 默认0.000@property(nonatomic, assign) CGFloat extendedIndicatorLength;/** Inset left and right edges of segments. Default is UIEdgeInsetsMake(0, 5, 0, 5) */@property (nonatomic, readwrite) UIEdgeInsets segmentEdgeInset;@property (nonatomic, readwrite) UIEdgeInsets enlargeEdgeInset;@property (nonatomic, readwrite) UIEdgeInsets boxEdgeInset;/** 用户选择时是否开启动画 Default is YES. */@property (nonatomic) BOOL shouldAnimateUserSelection;- (id)initWithSectionTitles:(NSArray&lt;NSString *&gt; *)sectiontitles;- (id)initWithSectionImages:(NSArray&lt;UIImage *&gt; *)sectionImages sectionSelectedImages:(NSArray&lt;UIImage *&gt; *)sectionSelectedImages;- (instancetype)initWithSectionImages:(NSArray&lt;UIImage *&gt; *)sectionImages sectionSelectedImages:(NSArray&lt;UIImage *&gt; *)sectionSelectedImages titlesForSections:(NSArray&lt;NSString *&gt; *)sectiontitles;- (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated;- (void)setIndexChangeBlock:(IndexChangeBlock)indexChangeBlock;- (void)setTitleFormatter:(HMTitleFormatterBlock)titleFormatter;@end]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>翻译</tag>
+        <tag>三方库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用 imageWithContentsOfFile 自动加载@2x @3x图]]></title>
+    <url>%2F2018%2F03%2F17%2F%E4%BD%BF%E7%94%A8%20imageWithContentsOfFile%20%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%402x%20%403x%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[使用本地存储文件自动获取2x 3x 图12NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@&quot;t.png&quot;];_imageView.image = [UIImage imageWithContentsOfFile: imagePath];]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Note</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cocoapods 引入 Masonry 使用类别 mas_bottomMargin 崩溃]]></title>
+    <url>%2F2018%2F03%2F09%2Fcocoapods%20%E5%BC%95%E5%85%A5%20Masonry%20%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%88%AB%20mas_bottomMargin%20%E5%B4%A9%E6%BA%83%2F</url>
+    <content type="text"><![CDATA[报错信息1-[UIView mas_bottomMargin]: unrecognized selector sent to instance 错误分析 检查于 setting 配置里面写没有-all_load，但是配置了-ObjC，不是这里的原因。 调用mas_bottom时正常运行，mas_bottomMargin会崩溃。猜测可能是 Masonry 的原因。 检查源码发现如下关键代码，宏定义 iOS 版本低于8.0 没有Margin属性 1#if (__IPHONE_OS_VERSION_MIN_REQUIRED &gt;= 80000) || (__TV_OS_VERSION_MIN_REQUIRED &gt;= 9000) 我工程配置的 iOS8.0，但是 pods 里面 Masonry 的静态库的 iOS Deployment Target 是 iOS6.0。 改成 iOS8.0 运行，一切OK。]]></content>
+      <categories>
+        <category>Cocoapods</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Crash</tag>
+        <tag>Cocoapods</tag>
+        <tag>Masonry</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS 11 设置navigationBar.alpha 失效]]></title>
+    <url>%2F2017%2F06%2F23%2FiOS%2011%20%E8%AE%BE%E7%BD%AEnavigationBar.alpha%20%E5%A4%B1%E6%95%88%2F</url>
+    <content type="text"><![CDATA[navigationBar透明实现（iOS 11 之前） 设置 navigationBar 的 BackgroundImage 为 [UIImage new] 设置navigationBar 的 subviews.firstObject 的 alpha = 0 ，subviews.firstObject 是 _UIbarBackGround 类型 ；再或者设置_UIbarBackGround 上面模糊的那个 view 的alpha 也可以 iOS 11出现的问题iOS 11 新出来一个LargeTitles ，导航栏变得比以前更大 新的导航栏带来一个问题，之前透过这是 alpha 值来进行透明度设置会失效，原因是在加入 large 模式之后 apple 会对普通模式的 nav 的 _UIbarBackGround 进行一次 alpha = 1 的设置。 关于这一点出现的原因我有一个猜想 首先设置nav 的 backgroundImage 给 nav 一个背景图 然后设置 nav 的 backgroundColor 当 prefersLargeTitles = NO 也就是 普通 nav 模式的时候，显示backgroundImage 当 prefersLargeTitles = YES, nav 显示的是backgroundColor 此时的_UIbarBackGround 的 alpha 被 apple 设置为 0 所以相应的在 普通模式的时候 apple 为了显示backgroundImage 会把 nav 的 alpha 设置为 1 ，这就影响了我们在 viewWillAppear 里面给 nav 设置的 alpha PS：backgroundImage 是在 _UIbarBackGround上面的，backgroundColor设置在navigationBar上]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>NavigationBar</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[模态弹出半透明的控制器]]></title>
+    <url>%2F2017%2F06%2F05%2F%E6%A8%A1%E6%80%81%E5%BC%B9%E5%87%BA%E5%8D%8A%E9%80%8F%E6%98%8E%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[UIModalPresentationFullScreen默认样式，presented 视图全屏显示presenting 视图控制器的 view 会在模态结束后移除 UIModalPresentationPageSheet &amp;&amp; UIModalPresentationFormSheet horizontally regular 以下简称 HR,horizontally compact 简称 HC FormSheetHR 模式下会调整大小如果设备横向，且键盘是可见，则视图的位置向上调整。HC 模式下等同于 UIModalPresentationFullScreen PageSheet HR 模式下，宽等于竖屏下的 Screen 的宽，高等于当前 Screen 的高。竖屏模式下这个选项本质等同于 UIModalPresentationFullScreenHC 模式下等同于 UIModalPresentationFullScreen 通俗来讲就是：iPhone 竖屏模式下 == UIModalPresentationFullScreeniPhone 横屏模式如下图iPad 竖屏 PageSheet == UIModalPresentationFullScreeniPad 其他模式都调整大小，类似上图 UIModalPresentationCurrentContextpresented VC 的模态样式等同于 presenting VC 的模态类型12b.modalPresentationStyle = UIModalPresentationFormSheetc.modalPresentationStyle = UIModalPresentationCurrentContext 如上所示 C 的样式继承了 B ，且 C 加载完 B 被移除 UIModalPresentationOverFullScreen &amp;&amp; UIModalPresentationOverCurrentContext前面的几种样式大都是在模态完之后就移除了上个页面 view，新的 View 作为 Window 的 rootView.所以很多想实现透明、半透明效果的人，都会发现自己的透明背景变成黑色了 要实现透明就需要设置为这两个类型的一个 OverFullScreen看名字就知道了，全屏显示，无视 NavBar Tabbar 。 OverCurrentContext添加新视图到最近的一个设置definesPresentationContext属性为 YES的视图控制器上 definesPresentationContextOverCurrentContext，CurrentContext 模态推出视图控制器的 View 将覆盖到设置这个属性的视图控制器上UIViewController 的默认值为 NO，UINavigationController 默认值为 YES eg. A 模态 BA 的默认 definesPresentationContext 值为 NO结果：B 覆盖了 A 和 导航栏因为 NavController 的 definesPresentationContext 默认为 YES A 模态 BA 的 definesPresentationContext 设置为 YES结果：B 覆盖了 A ,单是未覆盖导航NavController 和 B 值都是 YES，但是 B 距离 A 更近]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>OC</tag>
+        <tag>Note</tag>
+        <tag>翻译</tag>
+      </tags>
+  </entry>
+</search>
