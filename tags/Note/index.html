@@ -48,19 +48,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -73,8 +73,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -535,6 +537,7 @@
   
 
 
+
           </div>
           
 
@@ -551,7 +554,6 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -565,7 +567,7 @@
               <img class="site-author-image" itemprop="image" src="https://secure.gravatar.com/avatar/d3649231326efbdcb96c98a050b41d8f?s=200&d=identicon" alt="杨林">
             
               <p class="site-author-name" itemprop="name">杨林</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <div class="site-description motion-element" itemprop="description"></div>
           </div>
 
           
@@ -585,7 +587,11 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
                     
                     
                       
@@ -610,7 +616,11 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
                     
                     
                       
@@ -663,6 +673,8 @@
                 </div>
               
             </nav>
+          
+
           
 
           
@@ -725,6 +737,7 @@
 
     </div>
   </aside>
+  
 
 
         
@@ -753,12 +766,13 @@
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.1</div>
 
 
 
 
         
+
 
 
 
@@ -830,75 +844,71 @@
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
-
-
-
-  
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
+  <script src="/js/src/motion.js?v=7.0.1"></script>
 
 
 
   
   
-  
-  
-  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  <script>
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail';
-    guest = guest.split(',').filter(function(item) {
-      return GUEST.indexOf(item) > -1;
-    });
-    new Valine({
-      el: '#comments',
-      verify: false,
-      notify: false,
-      appId: 'fRWuTjSEDqJWmB3DrTjX3Lsj-gzGzoHsz',
-      appKey: 'kp5uK2DcgdmK1KfHUgJcroep',
-      placeholder: '',
-      avatar: 'mm',
-      meta: guest,
-      pageSize: '10' || 10,
-      visitor: true
-    });
-  </script>
 
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
 
 
 
   
 
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'fRWuTjSEDqJWmB3DrTjX3Lsj-gzGzoHsz',
+    appKey: 'kp5uK2DcgdmK1KfHUgJcroep',
+    placeholder: '',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+
+  
   <script>
     // Popup Window;
     var isfetched = false;
@@ -1222,6 +1232,8 @@
 
 
 
+
+  
 
   
 
