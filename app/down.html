@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>下载商城 APP</title>
+	</head>
+	<body>
+        <div style="height: 300px; background-color: #DEC180; text-align: center;">
+             <p style="padding: 120px;" onclick="downApp()" >点击下载</p>
+        </div>
+	</body>
+    <script type="text/javascript">
+        function downApp() {
+            window.location.href="itms-services://?action=download-manifest&url=https://www.jackyanglin.com/app/info.plist"
+        }
+    </script>
+</html>
